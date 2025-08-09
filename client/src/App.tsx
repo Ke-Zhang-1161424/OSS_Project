@@ -2,7 +2,8 @@ const products = [
     {name:'product1',price:100.00},
     {name:'product2',price:200.00},
     {name:'product3',price:300.00},
-    {name:'product3',price:300.00},
+    {name:'product4',price:400.00},
+    {name:'product5',price:500.00},
 ]
 
 function App() {
