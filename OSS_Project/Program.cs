@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+ï»¿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OSS_Project.Data;
 
@@ -10,7 +10,7 @@ namespace OSS_Project
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Ìí¼Ó Swagger Éú³ÉÆ÷·şÎñ
+            // æ·»åŠ  Swagger ç”Ÿæˆå™¨æœåŠ¡
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
@@ -22,37 +22,39 @@ namespace OSS_Project
             });
             builder.Services.AddDbContext<StoreContext>(opt =>
             {
-                opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")); // Ê¹ÓÃ SQLite Êı¾İ¿â
+                opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")); // ä½¿ç”¨ SQLite æ•°æ®åº“
             });
 
-            // Ìí¼Ó MVC ¿ØÖÆÆ÷·şÎñ
+            // æ·»åŠ  MVC æ§åˆ¶å™¨æœåŠ¡
             builder.Services.AddControllers();
 
             var app = builder.Build();
 
-            // È·±£Êı¾İ¿âÒÑ´´½¨²¢³õÊ¼»¯
+            // ç¡®ä¿æ•°æ®åº“å·²åˆ›å»ºå¹¶åˆå§‹åŒ–
             using (var scope = app.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<StoreContext>();
-                context.Database.Migrate(); // Ó¦ÓÃÊı¾İ¿âÇ¨ÒÆ
+                context.Database.Migrate(); // åº”ç”¨æ•°æ®åº“è¿ç§»
                 DbInitializer.Initialize(context);
             }
 
-            // ÆôÓÃ Swagger£¨Ö»ÔÚ¿ª·¢»·¾³£©
+            // å¯ç”¨ Swaggerï¼ˆåªåœ¨å¼€å‘ç¯å¢ƒï¼‰
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger(); // Ìá¹© swagger.json
-                app.UseSwaggerUI(c => // Ìá¹©¿ÉÊÓ»¯Ò³Ãæ
+                app.UseSwagger(); // æä¾› swagger.json
+                app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                    c.RoutePrefix = string.Empty; // âœ… å…³é”®ï¼šè®© "/" å°±æ˜¯ Swagger UI
                 });
             }
+
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
-            app.MapControllers(); // Ó³Éä¿ØÖÆÆ÷Â·ÓÉ
+            app.MapControllers(); // æ˜ å°„æ§åˆ¶å™¨è·¯ç”±
 
             app.Run();
         }
