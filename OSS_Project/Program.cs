@@ -10,6 +10,8 @@ namespace OSS_Project
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // 添加 MVC 控制器服务
+            builder.Services.AddControllers();
             // 添加 Swagger 生成器服务
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
@@ -24,9 +26,9 @@ namespace OSS_Project
             {
                 opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")); // 使用 SQLite 数据库
             });
+            builder.Services.AddCors();
 
-            // 添加 MVC 控制器服务
-            builder.Services.AddControllers();
+
 
             var app = builder.Build();
 
@@ -50,7 +52,13 @@ namespace OSS_Project
             }
 
 
-            app.UseHttpsRedirection();
+
+            //app.UseHttpsRedirection();
+
+            app.UseCors(opt =>
+            {
+                opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"); // 允许来自特定源的跨域请求
+            });
 
             app.UseAuthorization();
 
