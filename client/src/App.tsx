@@ -38,8 +38,8 @@ function App() {
     <div>
           <h1 style={{ color: 'red' }}>Re-Store</h1>
           <ul>
-              {products.map((item,index) => (
-                  <li key={index}>{item.name}-{ item.price}</li> 
+              {products.map(product => (
+                  <li key={product.id}>{product.name}-{product.price}</li> 
               ))}
           </ul>
           <button onClick={addProduct}>Add product</button>
@@ -47,4 +47,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
