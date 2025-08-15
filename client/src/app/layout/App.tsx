@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import type { Product } from './product';
+import type { Product } from '../models/product';
+import Catalog from '../../features/catalog/Catalog'; // 新增导入
+import { Typography } from '@mui/material';
 
 
 // 这是一个简单的 React 应用程序，使用 TypeScript 和 React Hooks
@@ -36,13 +38,8 @@ function App() {
 
   return (
     <div>
-          <h1 style={{ color: 'red' }}>Re-Store</h1>
-          <ul>
-              {products.map(product => (
-                  <li key={product.id}>{product.name}-{product.price}</li> 
-              ))}
-          </ul>
-          <button onClick={addProduct}>Add product</button>
+          <Typography variant = 'h1'>Re-Store</Typography>
+          <Catalog products={products} addProduct={addProduct} />
     </div>
   )
 }
