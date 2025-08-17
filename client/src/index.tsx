@@ -8,7 +8,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 
-
+// 这里使用了 React 18 的 createRoot API 来渲染应用程序
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

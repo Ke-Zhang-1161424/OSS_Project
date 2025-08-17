@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import type { Product } from '../models/product';
 import Catalog from '../../features/catalog/Catalog'; // 新增导入
-import { Typography } from '@mui/material';
+import { Container, CssBaseline } from '@mui/material';
+import Header from './Hearder';
 
 
 // 这是一个简单的 React 应用程序，使用 TypeScript 和 React Hooks
@@ -20,6 +21,8 @@ function App() {
 
 
 
+
+    // 这个函数用于添加一个新产品到产品列表中
     function addProduct() {
         setProducts(prevState => [...products, // ...是展开运算符，用于将现有数组的元素展开到新数组中
             {
@@ -35,13 +38,18 @@ function App() {
     }
 
 
-
+    // 返回 JSX 结构，渲染应用程序的界面
   return (
-    <div>
-          <Typography variant = 'h1'>Re-Store</Typography>
-          <Catalog products={products} addProduct={addProduct} />
-    </div>
+      <>
+          <CssBaseline />
+          <Header />
+          <Container>
+              <Catalog products={products} addProduct={addProduct} />
+          </Container>
+
+    </>
   )
 }
 
+// 这里导出 App 组件，以便在其他文件中使用
 export default App;
