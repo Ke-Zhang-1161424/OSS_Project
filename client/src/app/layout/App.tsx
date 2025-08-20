@@ -1,53 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import type { Product } from '../models/product';
 import Catalog from '../../features/catalog/Catalog'; // 新增导入
-import { Container, CssBaseline } from '@mui/material';
+import { Container, CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import Header from './Hearder';
+import { useState } from 'react'; // 导入 useState Hook
+
 
 
 // 这是一个简单的 React 应用程序，使用 TypeScript 和 React Hooks
 // useState 是 React 的一个 Hook，用于在函数组件中添加状态
 function App() {
-    const [products, setProducts] = useState<Product[]>([]);
+    const [darkMode, setDarkMode] = useState(false); // 定义一个状态变量 darkMode，初始值为 false
+    const palettetype = darkMode ? 'dark' : 'light'; // 根据 darkMode 的值设置调色板类型
+    const theme = createTheme({
+        palette: {
+            mode: palettetype, // 设置调色板模式为 light 或 dark
+        }
+    });
 
-
-
-    // useEffect 是 React 的一个 Hook，用于在组件渲染后执行副作用操作，这里传入空数组表示只在组件挂载时执行一次
-    useEffect(() => {              
-        fetch('http://localhost:5000/api/products')
-            .then(response => response.json())
-            .then(data => setProducts(data)) // 将获取到的数据设置到状态中
-    }, []);  // []一定要有，不然会导致无限循环
-
-
-
-
-    // 这个函数用于添加一个新产品到产品列表中
-    function addProduct() {
-        setProducts(prevState => [...products, // ...是展开运算符，用于将现有数组的元素展开到新数组中
-            {
-                id: prevState.length + 101,
-                name: 'product' + (prevState.length + 1),
-                price: (prevState.length * 100) + 100,
-                brand: 'some brand',
-                description: 'some description',
-                imageUrl: 'https://via.placeholder.com/150',
-
-
-            }]) 
+    // 这是一个处理主题切换的函数，当用户切换主题时调用
+    function handleThemeChange() {
+        setDarkMode(!darkMode);
     }
 
 
     // 返回 JSX 结构，渲染应用程序的界面
   return (
-      <>
+      <ThemeProvider theme={ theme}>
           <CssBaseline />
-          <Header />
+          <Header darkMode={darkMode} handleThemeChange={ handleThemeChange} />
           <Container>
-              <Catalog products={products} addProduct={addProduct} />
+              <Catalog />
           </Container>
 
-    </>
+    </ThemeProvider>
   )
 }
 

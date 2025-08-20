@@ -9,7 +9,7 @@ export default function ProductList({ products }: Props) {
         <Grid container spacing={4}>
             {products.map((product) => (
                 // v7 写法：不要 item，用 size 指定断点列数
-                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={product.id}>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }} key={product.id}>
                     <ProductCard product={product} />
                 </Grid>
             ))}
