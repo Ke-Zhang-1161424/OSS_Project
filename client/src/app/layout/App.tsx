@@ -13,6 +13,9 @@ function App() {
     const theme = createTheme({
         palette: {
             mode: palettetype, // 设置调色板模式为 light 或 dark
+            background: {
+                default: palettetype === 'light'?'#eaeaea':'#121212'
+            }
         }
     });
 
