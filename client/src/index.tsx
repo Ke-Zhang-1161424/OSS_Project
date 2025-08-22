@@ -1,16 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './app/layout/styles.css'
-import App from "./app/layout/App.tsx"
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./app/layout/styles.css";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./app/router/Routes";
 
+const root = createRoot(document.getElementById("root")!);
 
-// 这里使用了 React 18 的 createRoot API 来渲染应用程序
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+root.render(
+    <StrictMode>
+        <RouterProvider router={router} />
+    </StrictMode>
+);

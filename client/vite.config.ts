@@ -1,10 +1,19 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
 
-// https://vite.dev/config/
 export default defineConfig({
-    server: {
-        port: 3000
+    plugins: [react()],
+    resolve: {
+        // 关键：不管谁从哪儿 import，都折叠到同一份 React/ReactDOM
+        dedupe: ['react', 'react-dom'],
     },
-  plugins: [react()],
-})
+    optimizeDeps: {
+        // 明确预构建这些依赖，避免指错 React 实例
+        include: ['react', 'react-dom', 'react-router-dom', '@mui/material'],
+    },
+    server: {
+        port: 3000,
+        strictPort: true,
+    },
+});
