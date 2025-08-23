@@ -1,5 +1,6 @@
 import { Card, CardMedia, CardContent, Typography, CardActions, Button ,CardHeader, Avatar} from "@mui/material";
 import type { Product } from "../../app/models/product";
+import { Link } from "react-router-dom";
 
 // 这里定义了一个 Props 接口，用于指定组件的属性类型
 interface Props {
@@ -40,7 +41,7 @@ export default function ProductCard({ product }:Props) {
             </CardContent>
             <CardActions>
                 <Button size="small">Add to cart</Button>
-                <Button size="small">View</Button>
+                <Button component={Link} to={ `/catalog/${product.id}`} size="small">View</Button>
             </CardActions>
         </Card>
     )
