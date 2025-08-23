@@ -1,4 +1,3 @@
-// src/features/catalog/Catalog.tsx
 import { useEffect, useState } from 'react';
 import type { Product } from '../../app/models/product.ts';
 import ProductList from './ProductList';
