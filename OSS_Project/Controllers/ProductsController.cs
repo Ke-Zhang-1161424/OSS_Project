@@ -5,12 +5,8 @@ using OSS_Project.Entities;
 
 namespace OSS_Project.Controllers
 {
-    // 这是一个产品控制器类，负责处理与产品相关的 API 请求
-    // 注意：此处的 [ApiController] 特性表示这是一个 API 控制器，提供了自动化的模型验证和错误处理
-    // [Route] 特性定义了控制器的路由前缀
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    // 继承自 BaseApiController，表示这是一个 API 控制器
+    public class ProductsController : BaseApiController
     {
 
         private readonly StoreContext _context; // StoreContext 是数据上下文类，用于与数据库交互

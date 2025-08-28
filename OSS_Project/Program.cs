@@ -41,6 +41,8 @@ namespace OSS_Project
             }
 
             // 启用 Swagger（只在开发环境）
+            app.UseDeveloperExceptionPage(); // 开发环境下启用详细的错误页面
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger(); // 提供 swagger.json
