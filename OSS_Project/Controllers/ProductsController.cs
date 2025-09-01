@@ -28,7 +28,11 @@ namespace OSS_Project.Controllers
         [HttpGet("{id}")] // 获取指定 ID 的产品
         public async Task<ActionResult<Product>> GetProduct(int id)
         { 
-            return await _context.Products.FindAsync(id); // 在数据库中查找指定 ID 的产品
+            var product = await _context.Products.FindAsync(id); // 在数据库中查找指定 ID 的产品
+
+            if (product == null) return NotFound(); // 如果找不到，返回 404 Not Found
+
+            return product; // 返回找到的产品
         }
     }
 }

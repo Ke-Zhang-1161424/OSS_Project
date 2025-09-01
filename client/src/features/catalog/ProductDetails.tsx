@@ -2,19 +2,23 @@ import { Grid, Table, TableContainer, Typography, TableBody, TableRow, TableCell
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
 import Divider from "@mui/material/Divider";
 import { Product } from "../../app/models/product";
+import agent from "../../app/api/agent";
+
+// 这个组件负责显示产品的详细信息
 
 export default function ProductDetailsPage() {
 
+    // 从URL参数中获取产品ID
     const { id } = useParams<{ id: string }>();
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
 
+    // 使用useEffect在组件挂载时获取产品详情
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/Products/${id}`)
-            .then(response => setProduct(response.data))
+        id && agent.Catalog.details(parseInt(id))
+            .then(response => setProduct(response))
             .catch(error => console.log(error))
             .finally(() => setLoading(false));
     }, [id])

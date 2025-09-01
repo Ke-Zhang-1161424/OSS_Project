@@ -19,7 +19,7 @@ namespace OSS_Project.Controllers
         [HttpGet("unauthorized")]
         public ActionResult GetUnauthorized()
         {
-            return GetUnauthorized(); // 返回 401 Unauthorized 响应
+            return Unauthorized(); // 返回 401 Unauthorized 响应
         }
 
         [HttpGet("validation-error")]

@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OSS_Project.Data;
+
 
 namespace OSS_Project
 {
@@ -41,7 +43,7 @@ namespace OSS_Project
             }
 
             // 启用 Swagger（只在开发环境）
-            app.UseDeveloperExceptionPage(); // 开发环境下启用详细的错误页面
+            app.UseMiddleware<OSS_Project.Middleware.ExceptionMiddleware>(); // 开发环境下启用详细的错误页面
 
             if (app.Environment.IsDevelopment())
             {
@@ -49,7 +51,7 @@ namespace OSS_Project
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                    c.RoutePrefix = string.Empty; // ✅ 关键：让 "/" 就是 Swagger UI
+                    c.RoutePrefix = string.Empty; // 关键：让 "/" 就是 Swagger UI
                 });
             }
 
