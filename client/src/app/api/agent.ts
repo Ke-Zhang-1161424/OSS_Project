@@ -3,6 +3,8 @@ import { toast } from "react-toastify";
 import { router } from "../router/Routes";
 
 
+const sleep = () => new Promise(resolve => setTimeout(resolve, 1000));
+
 // axios在这里的baseURL是指向后端API的基础路径
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 
@@ -11,7 +13,8 @@ axios.defaults.baseURL = 'http://localhost:5000/api/';
 const responseBody = (response: AxiosResponse) => response.data;
 
 // 这里设置了请求拦截器，在每个请求中添加一个延迟，模拟网络延迟，然后更好的观察加载状态
-axios.interceptors.response.use(response => {
+axios.interceptors.response.use(async response => {
+    await sleep();
     return response
 }, (error: AxiosError) => {
     const { data, status } = error.response as AxiosResponse;
