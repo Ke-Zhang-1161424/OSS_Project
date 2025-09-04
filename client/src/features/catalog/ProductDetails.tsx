@@ -5,6 +5,8 @@ import { useState } from "react";
 import Divider from "@mui/material/Divider";
 import { Product } from "../../app/models/product";
 import agent from "../../app/api/agent";
+import NotFound from "../../app/errors/NotFound"
+
 
 // 这个组件负责显示产品的详细信息
 
@@ -25,14 +27,14 @@ export default function ProductDetailsPage() {
 
     if (loading) return <h3>Loading...</h3>
 
-    if (!product) return <h3>Product not found</h3>
+    if (!product) return <NotFound/>
 
     return (
         <Grid container spacing={ 6}>
-            <Grid size={{xs:6}}>
+            <Grid item xs={12} md={ 6}>
                 <img src={product.imageUrl} alt={product.name} style={{width:'100%'}} />
             </Grid>
-            <Grid size={{xs:6}}>
+            <Grid item xs={12} md={ 6}>
                 <Typography variant='h3'>{product.name}</Typography>
                 <Divider sx={{ mb: 2 }} />
                 <Typography variant='h4' color='secondary'>${(product.price / 100).toFixed(2)}</Typography>
