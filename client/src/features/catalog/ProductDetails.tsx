@@ -6,6 +6,7 @@ import Divider from "@mui/material/Divider";
 import { Product } from "../../app/models/product";
 import agent from "../../app/api/agent";
 import NotFound from "../../app/errors/NotFound"
+import LoadingComponent from "../../app/layout/LoadingComponent";
 
 
 // 这个组件负责显示产品的详细信息
@@ -25,9 +26,10 @@ export default function ProductDetailsPage() {
             .finally(() => setLoading(false));
     }, [id])
 
-    if (loading) return <h3>Loading...</h3>
 
-    if (!product) return <NotFound/>
+    if (loading) return <LoadingComponent message='Loading Products...' /> // 这里显示加载组件
+
+    if (!product) return <NotFound /> // 如果没有找到产品，显示404页面
 
     return (
         <Grid container spacing={ 6}>

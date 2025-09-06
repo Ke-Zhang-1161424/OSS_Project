@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { router } from "../router/Routes";
 
 
-const sleep = () => new Promise(resolve => setTimeout(resolve, 1000));
+const sleep = () => new Promise(resolve => setTimeout(resolve, 500)); //这个是模拟网络延迟的函数
 
 // axios在这里的baseURL是指向后端API的基础路径
 axios.defaults.baseURL = 'http://localhost:5000/api/';
